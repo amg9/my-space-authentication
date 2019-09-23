@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import 'semantic-ui-css/semantic.min.css';
 import { AuthProvider, } from './providers/AuthProvider';
+import { BrowserRouter, } from 'react-router-dom';
 
 ReactDOM.render(
   <AuthProvider>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </AuthProvider>, 
   document.getElementById('root')
 );
