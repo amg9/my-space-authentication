@@ -11,6 +11,11 @@ class Navbar extends React.Component {
     if (user) {
       return (
         <Menu.Menu position="right">
+          <Link to={`/profile/${user.id}`}>
+            <Menu.Item active={location.pathname === `/profile/${user.id}`}>
+              My Profile
+            </Menu.Item>
+          </Link>
           <Menu.Item
             name="logout"
             onClick={ () => handleLogout(history) }
@@ -38,9 +43,9 @@ class Navbar extends React.Component {
   render() {
     return (
       <Menu>
-        <Menu.Item>
-          <Link to="/">Home</Link>
-        </Menu.Item>
+        <Link to="/">
+          <Menu.Item>Home</Menu.Item>
+        </Link>
         { this.rightNavItems() }
       </Menu>
     );
