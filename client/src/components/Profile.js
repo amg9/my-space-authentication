@@ -1,24 +1,27 @@
 import React from 'react';
-import { AuthConsumer, } from '../providers/AuthProvider'
+import axios from 'axios';
 
 class Profile extends React.Component {
+  state = { user: {}, }
+
+  componentDidMount() {
+    axios.get(`/api/users/${this.props.match.params.id}`)
+      .then ( res => {
+        this.setState({ user: res.data, })
+      })
+  }
+
   render() {
-    const { user, } = this.props.auth
+    const { user, } = this.state
     return (
       <>
         <img src={user.image}/>
-        <h1>{user.name}</h1>
+        <h1>{user.nickname}</h1>
+        <h2>{user.name}</h2>
+        <p>{user.email}</p>
       </>
     )
   }
 }
 
-const ConnectedProfile = (props) => (
-  <AuthConsumer>
-    { value => 
-      <Profile {...props} auth={value} />
-    }
-  </AuthConsumer>
-)
-
-export default ConnectedProfile;
+export default Profile;
