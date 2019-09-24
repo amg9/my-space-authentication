@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import NoMatch from './components/NoMatch';
 import Register from './components/Register';
+import Login from './components/Login';
 
 const App = () => (
   <>
@@ -14,6 +15,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
         <Route component={NoMatch} />
       </Switch>
     </Container>
