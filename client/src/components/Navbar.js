@@ -41,10 +41,18 @@ class Navbar extends React.Component {
   };
 
   render() {
+    const { location, } = this.props;
     return (
       <Menu>
         <Link to="/">
-          <Menu.Item>Home</Menu.Item>
+          <Menu.Item active={location.pathname === '/'}>
+            Home
+          </Menu.Item>
+        </Link>
+        <Link to="/people">
+          <Menu.Item active={location.pathname === '/people'}>
+            People
+          </Menu.Item>
         </Link>
         { this.rightNavItems() }
       </Menu>

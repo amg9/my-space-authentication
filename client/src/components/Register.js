@@ -3,7 +3,7 @@ import { Form, Header, } from 'semantic-ui-react';
 import { AuthConsumer, } from '../providers/AuthProvider';
 
 class Register extends React.Component {
-  state = { email: "", name: "", password: "", passwordConfirmation: "", };
+  state = { email: "", name: "", nickname: "", password: "", passwordConfirmation: "", };
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value, })
@@ -41,6 +41,15 @@ class Register extends React.Component {
             name="name"
             type="name"
             value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <Form.Input 
+            required
+            label="Nickname"
+            placeholder="Nickame"
+            name="nickname"
+            type="nickname"
+            value={this.state.nickname}
             onChange={this.handleChange}
           />
           <Form.Input 
