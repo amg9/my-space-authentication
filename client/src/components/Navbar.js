@@ -11,6 +11,11 @@ class Navbar extends React.Component {
     if (user) {
       return (
         <Menu.Menu position="right">
+          <Link to={`/friends`}>
+            <Menu.Item active={location.pathname === `/friends`}>
+              My Friends
+            </Menu.Item>
+          </Link>
           <Link to={`/profile/${user.id}`}>
             <Menu.Item active={location.pathname === `/profile/${user.id}`}>
               My Profile

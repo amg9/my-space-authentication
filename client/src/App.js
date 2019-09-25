@@ -12,6 +12,7 @@ import Profile from './components/Profile';
 import People from './components/People';
 import ProtectedRoute from './components/ProtectedRoute';
 import PostForm from './components/PostForm';
+import Friends from './components/Friends';
 
 const App = () => (
   <>
@@ -23,6 +24,7 @@ const App = () => (
         <FetchUser>
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/people" component={People} />
+          <ProtectedRoute exact path="/friends" component={Friends} />
           <ProtectedRoute exact path="/profile/:id" component={Profile} />
           <ProtectedRoute exact path="/:user_id/new_post" component={PostForm} />
           <ProtectedRoute exact path="/:user_id/edit_post/:id" component={PostForm} />

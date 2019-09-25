@@ -19,12 +19,8 @@ class People extends React.Component {
   }
 
   addFriend = (id) => {
-    if (this.props.auth.user) {
-      axios.put(`/api/friends/${id}`)
-        .then ( res => {
-          debugger
-        })
-    }
+    axios.put(`/api/friends/${id}`)
+      .then ( () => this.setState({ people: this.state.people.filter( p => p.id !== id ), }) )
   }
 
   render() {

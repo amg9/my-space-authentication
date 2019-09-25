@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :update] do
       resources :posts
     end
+    get 'friends', to: 'users#friends'
     put 'friends/:id', to: 'users#update_friends'
   end
 
