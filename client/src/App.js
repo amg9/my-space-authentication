@@ -10,23 +10,25 @@ import Login from './components/Login';
 import FetchUser from './components/FetchUser';
 import Profile from './components/Profile';
 import People from './components/People';
-import ProtectedRoute from './components/ProtectedRoute'
+import ProtectedRoute from './components/ProtectedRoute';
+import PostForm from './components/PostForm';
 
 const App = () => (
   <>
     <Navbar />
-    <FetchUser>
-      <Container>
-        <Switch>
+    <Container>
+      <Switch>
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
+        <FetchUser>
           <ProtectedRoute exact path="/" component={Home} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
           <ProtectedRoute exact path="/people" component={People} />
           <ProtectedRoute exact path="/profile/:id" component={Profile} />
-          <Route component={NoMatch} />
-        </Switch>
-      </Container>
-    </FetchUser>
+          <ProtectedRoute exact path="/:user_id/new_post" component={PostForm} />
+        </FetchUser>
+        <Route component={NoMatch} />
+      </Switch>
+    </Container>
   </>
 );
 
