@@ -9,4 +9,10 @@ class Api::UsersController < ApplicationController
 
   def update
   end
+
+  def update_friends
+    current_user.friends << params[:id].to_i
+    current_user.save
+    render json: current_user.friends
+  end
 end

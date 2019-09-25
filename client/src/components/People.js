@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, } from "react-router-dom";
-import { Card, } from "semantic-ui-react";
+import { Card, Button, } from "semantic-ui-react";
 import axios from "axios";
 import { AuthConsumer, } from "../providers/AuthProvider";
 
@@ -18,6 +18,15 @@ class People extends React.Component {
       })
   }
 
+  addFriend = (id) => {
+    if (this.props.auth.user) {
+      axios.put(`/api/friends/${id}`)
+        .then ( res => {
+          debugger
+        })
+    }
+  }
+
   render() {
     return (
       <Card.Group itemsPerRow="4">
@@ -30,6 +39,9 @@ class People extends React.Component {
                   {p.nickname}
                 </Link>
               </Card.Header>
+            </Card.Content>
+            <Card.Content extra>
+              <Button onClick={() => this.addFriend(p.id)}>Add Friend</Button>
             </Card.Content>
           </Card>
         )}
