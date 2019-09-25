@@ -14,9 +14,14 @@ class Api::UsersController < ApplicationController
     render json: User.friended(current_user.friends)
   end
 
-  def update_friends
+  def add_friend
     current_user.friends << params[:id].to_i
     current_user.save
     render json: current_user.friends
+  end
+
+  def remove_friend
+    current_user.friends.delete(params[:id].to_i)
+    current_user.save
   end
 end

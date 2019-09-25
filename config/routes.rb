@@ -7,9 +7,8 @@ Rails.application.routes.draw do
       resources :posts
     end
     get 'friends', to: 'users#friends'
-    put 'friends/:id', to: 'users#update_friends'
+    put 'add_friend/:id', to: 'users#add_friend'
+    put 'remove_friend/:id', to: 'users#remove_friend'
   end
-
-  
   
 end

@@ -13,6 +13,13 @@ class Friends extends React.Component {
       })
   };
 
+  removeFriend = (id) => {
+    axios.put(`/api/remove_friend/${id}`)
+      .then ( 
+        () => this.setState({ friends: this.state.friends.filter( f => f.id !== id ), }) 
+      )
+  }
+
   render() {
     return (
       <Card.Group itemsPerRow="4">
@@ -27,7 +34,7 @@ class Friends extends React.Component {
               </Card.Header>
             </Card.Content>
             <Card.Content extra>
-              <Button>Unfriend</Button>
+              <Button onClick={() => this.removeFriend(f.id)}>Unfriend</Button>
             </Card.Content>
           </Card>
         )}
