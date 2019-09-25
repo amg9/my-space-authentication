@@ -22,6 +22,7 @@ class Profile extends React.Component {
 
   render() {
     const { user, } = this.state
+    const { auth, } = this.props
     return (
       <div style={{display: 'flex', justifyContent: 'space-around',}}>
         <div>
@@ -31,8 +32,9 @@ class Profile extends React.Component {
           <p>{user.email}</p>
         </div>
         <div>
+          <Header as="h3">Posts</Header>
           { 
-            this.props.auth.user.id === user.id ?
+            auth.user.id === user.id ?
               <Button as={Link} to={`/${user.id}/new_post`}>New Post</Button>
             :
               null
@@ -41,6 +43,21 @@ class Profile extends React.Component {
             <Card key={p.id} >
               <Card.Content>
                 {p.body}
+              </Card.Content>
+              <Card.Content extra>
+              { 
+                auth.user.id === user.id ?
+                  <>
+                    <Button 
+                      as={Link} 
+                      to={`/${user.id}/edit_post/${p.id}`}
+                      icon="pencil"
+                    />
+                    <Button icon="trash" />
+                  </>
+                :
+                  <Button icon="heart" />
+              }
               </Card.Content>
             </Card> 
           )}

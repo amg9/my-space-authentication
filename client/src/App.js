@@ -25,6 +25,7 @@ const App = () => (
           <ProtectedRoute exact path="/people" component={People} />
           <ProtectedRoute exact path="/profile/:id" component={Profile} />
           <ProtectedRoute exact path="/:user_id/new_post" component={PostForm} />
+          <ProtectedRoute exact path="/:user_id/edit_post/:id" component={PostForm} />
         </FetchUser>
         <Route component={NoMatch} />
       </Switch>
