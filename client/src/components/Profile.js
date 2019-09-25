@@ -47,14 +47,11 @@ class Profile extends React.Component {
               <Card.Content extra>
               { 
                 auth.user.id === user.id ?
-                  <>
-                    <Button 
-                      as={Link} 
-                      to={`/${user.id}/edit_post/${p.id}`}
-                      icon="pencil"
-                    />
-                    <Button icon="trash" />
-                  </>
+                  <Button 
+                    as={Link} 
+                    to={`/${user.id}/edit_post/${p.id}`}
+                    icon="pencil"
+                  />
                 :
                   <Button icon="heart" />
               }

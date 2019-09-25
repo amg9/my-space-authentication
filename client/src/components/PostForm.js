@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, } from 'semantic-ui-react';
+import { Form, Button, } from 'semantic-ui-react';
 import axios from 'axios';
 
 class PostForm extends React.Component {
@@ -21,19 +21,26 @@ class PostForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { history, match, } = this.props;
-    const { id, user_id, } = this.props.match.params;
+    const { history, match: { params: { id, user_id,},}, } = this.props;
     if (id) {
       axios.put(`/api/users/${user_id}/posts/${id}`, this.state)
         .then( res => {
-          history.push(`/profile/${match.params.user_id}`)
+          history.push(`/profile/${user_id}`)
         })
     } else {
-      axios.post(`/api/users/${match.params.user_id}/posts`, this.state)
+      axios.post(`/api/users/${user_id}/posts`, this.state)
         .then( res => {
-          history.push(`/profile/${match.params.user_id}`)
+          history.push(`/profile/${user_id}`)
         })
     }
+  }
+
+  removePost = () => {
+    const { history, match: { params: { id, user_id,},}, } = this.props;
+    axios.delete(`/api/users/${user_id}/posts/${id}`)
+      .then( res => {
+        history.push(`/profile/${user_id}`)
+      })
   }
 
   render() {
@@ -46,7 +53,19 @@ class PostForm extends React.Component {
           value={this.state.body}
           onChange={this.handleChange}
         />
-        <Form.Button>Post</Form.Button>
+        { 
+          this.props.match.params.id ? 
+            <>
+              <Form.Button>Edit Post</Form.Button>
+              <Button 
+                icon="trash" 
+                onClick={this.removePost}
+              />
+            </>
+          :
+            <Form.Button>Post</Form.Button>
+        }
+        
       </Form>
     )
   }
