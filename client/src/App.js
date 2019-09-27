@@ -14,6 +14,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import PostForm from './components/PostForm';
 import Friends from './components/Friends';
 import UpdateUser from './components/UpdateUser';
+import DeleteAccount from './components/DeleteAccount'
 
 const App = () => (
   <>
@@ -28,6 +29,7 @@ const App = () => (
           <ProtectedRoute exact path="/friends" component={Friends} />
           <ProtectedRoute exact path="/profile/:id" component={Profile} />
           <ProtectedRoute exact path="/edit_profile" component={UpdateUser} />
+          <ProtectedRoute exact path="/delete_account" component={DeleteAccount} />
           <ProtectedRoute exact path="/:user_id/new_post" component={PostForm} />
           <ProtectedRoute exact path="/:user_id/edit_post/:id" component={PostForm} />
         </FetchUser>

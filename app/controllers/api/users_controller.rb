@@ -1,10 +1,12 @@
 class Api::UsersController < ApplicationController
+  before_action :set_user, only: [:show, :destroy]
+
   def index
     render json: User.all
   end
 
   def show
-    render json: User.find(params[:id])
+    render json: 
   end
 
   def update
@@ -13,6 +15,10 @@ class Api::UsersController < ApplicationController
     else
       render json: current_user.errors, status: 422
     end
+  end
+
+  def destroy
+    @user.destroy
   end
 
   def friends
@@ -33,5 +39,9 @@ class Api::UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:email, :name, :nickname, :image)
+    end
+
+    def set_user
+      @user = User.find(params[:id])
     end
 end

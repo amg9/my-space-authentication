@@ -41,16 +41,22 @@ export class AuthProvider extends React.Component {
   };
 
   handleUpdate = (new_info, history) => {
-    const { user, } = this.state
+    const { user, } = this.state;
     axios.put(`/api/users/${user.id}`, new_info)
       .then( res => {
-        this.setState({ user: res.data.data, })
+        this.setState({ user: res.data, })
         history.push(`/profile/${user.id}`);
       })
       .catch( err => {
         console.log(err);
       })
   };
+
+  deleteAccount = (history) => {
+    axios.delete(`/api/users/${this.state.user.id}`);
+    this.setState({ user: null, });
+    history.push('/register');
+  }
 
   render() {
     return (
@@ -61,6 +67,7 @@ export class AuthProvider extends React.Component {
         handleLogin: this.handleLogin,
         handleLogout: this.handleLogout,
         handleUpdate: this.handleUpdate,
+        deleteAccount: this.deleteAccount,
         setUser: (user) => this.setState({user,}),
       }}>
         {this.props.children}

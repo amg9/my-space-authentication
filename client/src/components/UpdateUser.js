@@ -1,6 +1,7 @@
 import React from 'react';
-import { Form, Header, } from 'semantic-ui-react';
+import { Form, Header, Button, } from 'semantic-ui-react';
 import { AuthConsumer, } from '../providers/AuthProvider';
+import { Link, } from 'react-router-dom';
 
 class UpdateUser extends React.Component {
   state = { email: "", name: "", nickname: "", image: "", };
@@ -22,8 +23,8 @@ class UpdateUser extends React.Component {
   render() {
     return (
       <>
-        <Header as="h1">UpdateUser</Header>
-        <Form onSubmit={this.handleSubmit}>
+        <Header as="h1">Edit Profile</Header>
+        <Form>
           <Form.Input 
             required
             autoFocus
@@ -58,8 +59,11 @@ class UpdateUser extends React.Component {
             value={this.state.image}
             onChange={this.handleChange}
           />
-          <Form.Button>Submit</Form.Button>
+          <Form.Button onClick={this.handleSubmit}>Submit</Form.Button>
         </Form>
+        <br />
+        <br />
+        <Button as={Link} to={'/delete_account'}>Delete Account</Button>
       </>
     );
   };

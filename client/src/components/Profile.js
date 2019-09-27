@@ -21,9 +21,7 @@ class Profile extends React.Component {
   }
 
   ifCurrentUser = (render1, render2) => {
-    const { user, } = this.state;
-    const { auth, } = this.props;
-    if (auth.user.id === user.id) {
+    if (this.props.auth.user.id === this.state.user.id) {
       return render1
     } else {
       return render2
