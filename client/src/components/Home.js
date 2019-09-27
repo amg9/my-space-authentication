@@ -1,10 +1,33 @@
 import React from 'react';
-import { Header, } from 'semantic-ui-react';
+import { Header, Card, } from 'semantic-ui-react';
+import axios from 'axios';
 
-const Home = () => (
-  <>
-    <Header as="h1">Home</Header>
-  </>
-);
+class Home extends React.Component {
+  state = { posts: [], }
+
+  componentDidMount() {
+    axios.get('/api/posts')
+      .then( res => {
+        this.setState({ posts: res.data, })
+      })
+    
+  }
+
+  render() {
+    return (
+      <>
+        <Header as="h1">Home</Header>
+        {this.state.posts.map( (p) => 
+          <Card key={p.id} >
+            <Card.Content>
+              {p.body}
+            </Card.Content>
+          </Card> 
+        )}
+      </>
+    );
+  };
+};
+  
 
 export default Home;

@@ -1,5 +1,5 @@
 class Api::PostsController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: [:index_all]
   before_action :set_post, only: [:show, :update, :destroy]
 
   def index
@@ -30,6 +30,10 @@ class Api::PostsController < ApplicationController
 
   def destroy
     @post.destroy
+  end
+
+  def index_all
+    render json: Post.all
   end
 
   private

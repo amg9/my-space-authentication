@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get 'friends', to: 'users#friends'
     put 'add_friend/:id', to: 'users#add_friend'
     put 'remove_friend/:id', to: 'users#remove_friend'
+    get 'posts', to: 'posts#index_all'
   end
   
 end
