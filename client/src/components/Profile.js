@@ -20,9 +20,18 @@ class Profile extends React.Component {
       })
   }
 
+  ifCurrentUser = (render1, render2) => {
+    const { user, } = this.state;
+    const { auth, } = this.props;
+    if (auth.user.id === user.id) {
+      return render1
+    } else {
+      return render2
+    }
+  }
+
   render() {
-    const { user, } = this.state
-    const { auth, } = this.props
+    const { user, } = this.state;
     return (
       <div style={{display: 'flex', justifyContent: 'space-around',}}>
         <div>
@@ -30,31 +39,31 @@ class Profile extends React.Component {
           <Header as="h1">{user.nickname}</Header>
           <h2>{user.name}</h2>
           <p>{user.email}</p>
+          { this.ifCurrentUser(
+            <Button as={Link} to={`/edit_profile`}>Edit Profile</Button>,
+            null
+          )}
         </div>
         <div>
           <Header as="h3">Posts</Header>
-          { 
-            auth.user.id === user.id ?
-              <Button as={Link} to={`/${user.id}/new_post`}>New Post</Button>
-            :
-              null
-          }
+          { this.ifCurrentUser(
+            <Button as={Link} to={`/${user.id}/new_post`}>New Post</Button>,
+            null
+          ) }
           {this.state.posts.map( (p) => 
             <Card key={p.id} >
               <Card.Content>
                 {p.body}
               </Card.Content>
               <Card.Content extra>
-              { 
-                auth.user.id === user.id ?
-                  <Button 
-                    as={Link} 
-                    to={`/${user.id}/edit_post/${p.id}`}
-                    icon="pencil"
-                  />
-                :
-                  <Button icon="heart" />
-              }
+              { this.ifCurrentUser(
+                <Button 
+                  as={Link} 
+                  to={`/${user.id}/edit_post/${p.id}`}
+                  icon="pencil"
+                />,
+                <Button icon="heart" />
+              )}
               </Card.Content>
             </Card> 
           )}

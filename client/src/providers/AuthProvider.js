@@ -40,6 +40,18 @@ export class AuthProvider extends React.Component {
       })
   };
 
+  handleUpdate = (new_info, history) => {
+    const { user, } = this.state
+    axios.put(`/api/users/${user.id}`, new_info)
+      .then( res => {
+        this.setState({ user: res.data.data, })
+        history.push(`/profile/${user.id}`);
+      })
+      .catch( err => {
+        console.log(err);
+      })
+  };
+
   render() {
     return (
       <AuthContext.Provider value={{
@@ -48,6 +60,7 @@ export class AuthProvider extends React.Component {
         handleRegister: this.handleRegister,
         handleLogin: this.handleLogin,
         handleLogout: this.handleLogout,
+        handleUpdate: this.handleUpdate,
         setUser: (user) => this.setState({user,}),
       }}>
         {this.props.children}

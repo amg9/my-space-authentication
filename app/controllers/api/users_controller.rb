@@ -8,6 +8,11 @@ class Api::UsersController < ApplicationController
   end
 
   def update
+    if current_user.update(user_params)
+      render json: current_user
+    else
+      render json: current_user.errors, status: 422
+    end
   end
 
   def friends
@@ -24,4 +29,9 @@ class Api::UsersController < ApplicationController
     current_user.friends.delete(params[:id].to_i)
     current_user.save
   end
+
+  private
+    def user_params
+      params.require(:user).permit(:email, :name, :nickname, :image)
+    end
 end
